@@ -65,7 +65,7 @@
 
 
                 <!-- Pending Task -->
-                <div class="task-item">
+                <!-- <div class="task-item">
 
                     <div class="task-info">
 
@@ -85,13 +85,59 @@
 
                     </div>
 
-                </div>
+                </div> -->
 
             </section>
 
         </main>
 
     </div>
+
+
+
+
+
+    <script>
+
+        const Todolist = JSON.parse(localStorage.getItem('Todolists')) || [];
+
+        Todolist.forEach((task) => {
+
+            if(task.status === 'pending'){
+
+                const taskItem = document.createElement('div');
+                taskItem.classList.add('task-item');
+
+                taskItem.innerHTML = `
+                    <div class="task-info">
+                        <h3>${task.title}</h3>
+                        <p>${task.description}</p>
+                        <div class="task-details">
+                            <span class="priority ${task.priority}">Priority: ${task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}</span>
+                            <span class="task-status pending-status">Status: ${task.status.charAt(0).toUpperCase() + task.status.slice(1)}</span>
+                            <span>Category: ${task.category.charAt(0).toUpperCase() + task.category.slice(1)}</span>
+                            <span>Due Date: ${new Date(task.dueDate).toLocaleDateString()}</span>
+                            <span>Due Time: ${task.dueTime}</span>
+                        </div>
+                    </div>
+                `;
+
+                document.querySelector('.tasks-section').appendChild(taskItem);
+            }
+            
+
+
+
+
+
+        });
+
+
+
+
+
+
+    </script>
 
 </body>
 

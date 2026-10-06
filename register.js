@@ -28,13 +28,10 @@ alert('account successfully created')
 form.reset()
 window.location.href = "index.html"
 }else{
-    alert('comfirm password or email or username')
+    alert('confirm password or email or username')
 }
 
 
 
-
-
-console.log(users)
 
 })

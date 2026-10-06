@@ -1,72 +1,78 @@
+'use strict';
+
 let username = document.querySelector('.Username')
 let icon = document.querySelector('.profile-icon')
 let tast_container = document.querySelector('.task-item')
-let Total = document.querySelector('.Total')
-let pending = document.querySelector('.pending')
+let Total = document.querySelector('#Total')
+let pending = document.querySelector('#pending')
+let completed = document.querySelector('#completed')
 
 
 
+const Active_user = JSON.parse(localStorage.getItem('Active_user')) ?? []
+const Todolist = JSON.parse(localStorage.getItem('Todolists')) ?? [];
 
 
-const Active_user = JSON.parse(localStorage.getItem('Active_user'))
+Todolist.forEach(function(task){
+    let status = ''
+   if(task.status === 'pending'){
+    status = 'pending-status'
+   }else if(task.status === 'completed'){
+    status = 'completed-status'
+   }else if(task.status === 'in-progress'){
+    status = 'in-progress-status'
+   }else if(task.status === 'overdue'){
+    status = 'overdue-status'
+   }else{
+    status = 'pending-status'
+   }
+
+
+    let html = ` 
+    <div class="task-item">
+
+            <div class="task-info">
+
+              <h3>${task.title}</h3>
+
+              <p class="task-description">
+                ${task.description}
+              </p>
+
+              <div class="task-details">
+                <span class="priority ${task.priority.toLowerCase()}"> Priority: ${task.priority} </span>
+
+                <span class="task-status ${status}">
+                  Status: ${task.status}    
+                </span>
+
+                <span> Category: ${task.category} </span>
+
+                <span> Due Date: ${task.dueDate} </span>
+
+                <span> Due Time: ${task.dueTime} </span>
+              </div>
+
+            </div>
+
+          </div> `
+          tast_container.insertAdjacentHTML('beforeend', html)
+
+});
+
+
+Total.textContent = Todolist.length
+
+let pendingTasks = Todolist.filter(function(task){
+    return task.status === 'pending'
+})
+pending.textContent = pendingTasks.length
+
+let completedTasks = Todolist.filter(function(task){
+    return task.status === 'completed'
+})  
+completed.textContent = completedTasks.length
 
 
 username.textContent = Active_user.email
-
-let profile_icon = Active_user.email.split('')[0].toUpperCase()
-
-icon.textContent = profile_icon
-
-
-Active_user.tasks = [];
-
-
-
-
-
-
-const Add_task = function(Tittle, Des, status){
-
-    let todo = {
-        tittle : Tittle,
-        des : Des,
-        status : status
-    }
-
-    Active_user.tasks.push(todo)
-
-
-
-
-
-    let type = status === '' ? "complete" : "pending"
-    let task = `
-    <div class="task-item">
-
-     <div class="task-info">
-
-                        <h3>${Tittle}</h3>
-
-                        <p>${Des}</p>
-
-                    </div>
-
-                    <span class="task-status pending-status">
-                        ${type}
-                    </span>
-                    </div>
-                    
-                    `
-                    tast_container.insertAdjacentHTML('beforebegin', task)
-                    return task
-
-
-}
-
-
-Total.textContent = Active_user.tasks.length 
-
-
-
-console.log(Active_user)
-
+icon.textContent = Active_user.name.charAt(0).toUpperCase()
