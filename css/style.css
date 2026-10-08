@@ -500,89 +500,141 @@ body {
 @media (max-width: 600px) {
 
     .dashboard-container {
-        flex-direction: column;
+        display: flex;
+        flex-direction: row;
+        min-height: 100vh;
     }
 
     .sidebar {
-        width: 100%;
-        min-height: auto;
-        padding: 20px;
+        width: 75%;
+        min-width: 75%;
+        min-height: 100vh;
+        padding: 15px 8px;
+        box-sizing: border-box;
     }
 
     .logo {
-        margin-bottom: 20px;
+        text-align: center
+        margin-bottom: 25px;
     }
+
+    .logo h2 {
+        font-size: 14px;
+    }
+
+    /* Sidebar Navigation */
 
     .sidebar-nav {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
     }
+
+    .sidebar-nav a {
+        width: 100%;
+        padding: 10px 4px;
+        text-align: center;
+        font-size: 10px;
+        line-height: 1.2;
+        box-sizing: border-box;
+    }
+
+      /* Logout */
 
     .logout-link {
-        margin-top: 15px;
+        display: block;
+        width: 100%;
+        margin-top: 20px;
+        padding: 10px 4px;
         text-align: center;
+        font-size: 10px;
+        box-sizing: border-box;
     }
+
+     /* Main Content */
 
     .dashboard-main {
-        padding: 20px;
+        flex: 1;
+        min-width: 0;
+        padding: 20px 12px;
+        box-sizing: border-box;
     }
+
+
+    /* Header */
 
     .dashboard-header {
+        display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: 20px;
+        gap: 12px;
     }
 
-    .task-item {
-        flex-direction: column;
-        align-items: flex-start;
+    .dashboard-header h1 {
+        font-size: 21px;
+    }
+
+    .dashboard-header p {
+        font-size: 13px;
+    }
+
+
+    /* Profile */
+
+    .user-profile {
+        align-self: flex-end;
+    }
+
+
+    /* Statistics */
+
+    .stats-container {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+
+    /* Tasks */
+
+    .tasks-section {
+        width: 100%;
+        overflow: hidden;
     }
 
     .tasks-header {
-        gap: 15px;
-        flex-wrap: wrap;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
     }
 
-}
+    .task-header-actions {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        gap: 8px;
+    }
 
-   /* TASK FORM */
 
-.task-form-section {
-  background: #ffffff;
-  padding: 30px;
-  border-radius: 15px;
-  border: 1px solid #eeeeee;
-  max-width: 800px;
-  margin: 30px auto;
-}
+    /* Task Cards */
 
-.task-form-header {
-  margin-bottom: 25px;
-}
+    .task-item {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 15px;
+    }
 
-.task-form-header h2 {
-  color: #222;
-  margin-bottom: 6px;
-}
+    .task-details {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
 
-.task-form-header p {
-  color: #777;
-  font-size: 14px;
-}
+    .task-details span {
+        font-size: 11px;
+    }
 
-/* Form groups */
-
-.task-form .form-group {
-  margin-bottom: 20px;
-}
-
-.task-form label {
-  display: block;
-  margin-bottom: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #333;
 }
 
 /* Inputs */
@@ -1092,4 +1144,49 @@ body {
 .theme-select:focus {
     outline: none;
     border-color: #2563eb;
+}
+
+/* =========================
+   DARK MODE
+========================= */
+
+body.dark-mode {
+    background: #111827;
+    color: #f9fafb;
+}
+
+body.dark-mode .sidebar {
+    background: #1f2937;
+}
+
+body.dark-mode .dashboard-main {
+    background: #111827;
+}
+
+body.dark-mode .dashboard-header h1 {
+    color: #f9fafb;
+}
+
+body.dark-mode .dashboard-header p {
+    color: #9ca3af;
+}
+
+body.dark-mode .settings-card {
+    background: #1f2937;
+    border-color: #374151;
+}
+
+body.dark-mode .settings-card h2,
+body.dark-mode .setting-item h3 {
+    color: #f9fafb;
+}
+
+body.dark-mode .setting-item > div p {
+    color: #9ca3af;
+}
+
+body.dark-mode .theme-select {
+    background: #374151;
+    color: #fff;
+    border-color: #4b5563;
 }
